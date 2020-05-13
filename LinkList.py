@@ -123,6 +123,54 @@ class LinkList():
                 i = i+1
             return itr.data
 
+    def makeOddEve(self,st1,st2):
+        if st2.next is None:
+            return st1
+        a = st1
+        b = st2
+        if st2.next.next:
+            st1.next = st2.next
+            st2.next = st2.next.next
+            return self.makeOddEve(a.next,b.next)
+        else:
+            if st2.next:
+                st1.next = st2.next
+                st2.next = None
+                return st1.next
+
+    def oddEvenList(self):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        st1 = self.head
+        if st1.next:
+            tmp = st1.next
+            st2 = st1.next
+        ret = self.makeOddEve(st1,st2)
+        ret.next = tmp
+
+    def printCustomList(self,head):
+        st = head
+        while(st):
+            print(st.data)
+            st = st.next
+
+    def reverseList(self,node):
+        if node.next is None:
+            self.head = node
+            return node
+        else:
+             ret = self.reverseList(node.next)
+             print("ret",ret.data)
+             print("node",node.data)
+             ret.next=node
+             return node
+
+    def reverse(self):
+        self.reverseList(self.head)
+
+
 #Driver Fucntion for Link List Operations
 def main():
     a = Node(1)
@@ -130,27 +178,38 @@ def main():
     #ll.printList()
     ll.add(2)
     ll.add(3)
-    print("LinkList\n")
+    ll.add(4)
+    ll.add(5)
+    ll.add(6)
+    ll.add(7)
+    ll.add(8)
+    print("LinkList")
     ll.printList()
-    ll.addAtStart(0)
-    print("LinkList\n")
+    print("Print ODD and EVEN list")
+    #ll.oddEvenList()
+    #ll.printList()
+    ll.reverse()
+    print("After Reverse")
     ll.printList()
-    ll.delI(1)
-    print("After Delete")
-    ll.printList()
-    ll.delKey(0)
-    print("After Delete")
-    ll.printList()
-    print("Length of List ",ll.getLength())
-    ll.printList()
-    print("Enter key to Search")
-    key = int(input())
-    print(ll.searchKey(key))
-    print("Give Nth Node to Search")
-    n = int(input())
-    print("Nth Node is ",ll.getNthNode(n))
-    ll.delList()
-    print("After Link List Delete")
+    #ll.addAtStart(0)
+    #print("LinkList\n")
+    #ll.printList()
+    #ll.delI(1)
+    #print("After Delete")
+    #ll.printList()
+    #ll.delKey(0)
+    #print("After Delete")
+    #ll.printList()
+    #print("Length of List ",ll.getLength())
+    #ll.printList()
+    #print("Enter key to Search")
+    #key = int(input())
+    #print(ll.searchKey(key))
+    #print("Give Nth Node to Search")
+    #n = int(input())
+    #print("Nth Node is ",ll.getNthNode(n))
+    #ll.delList()
+    #print("After Link List Delete")
 
 
 if __name__ == "__main__":
